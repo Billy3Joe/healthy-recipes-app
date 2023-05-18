@@ -4,8 +4,8 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 function InitialPage() {
   const navigation = useNavigation();
 
-  const actionNavigationLogin = () => {
-    navigation.navigate("SingnIn");
+  const actionNavigationSignin = () => {
+    navigation.navigate("Login");
   };
   const actionNavigationSignup = () => {
     navigation.navigate("SignUp");
@@ -53,7 +53,10 @@ function InitialPage() {
         >
           <Text>Signup</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={actionNavigationLogin} style={[styles.item]}>
+        
+        <TouchableOpacity 
+           onPress={actionNavigationSignin} 
+           style={[styles.item]}>
           <Text>Signin</Text>
         </TouchableOpacity>
       </View>
