@@ -26,6 +26,7 @@ const CreatePost = () => {
         {/* Contenu de votre barre de navigation */}
         <HeaderBar namePage={'CreatePost'} />
       </View>
+      <Text style={styles.title}>Créer une nouvelle recette</Text>
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
@@ -71,10 +72,16 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     paddingHorizontal: 0,
   },
+  title: {
+    fontSize: 24,
+    textAlign: 'center',
+    margin: 0,
+    color: 'green', // Couleur du texte du titre
+  },
   formContainer: {
     flex: 1,
     padding: 20,
-    backgroundColor: 'green',
+    backgroundColor: '#FFF',
   },
   input: {
     borderWidth: 1,
@@ -89,14 +96,14 @@ const styles = StyleSheet.create({
     marginBottom: 0,
   },
   addButton: {
-    backgroundColor: '#FFF',
+    backgroundColor: 'green',
     alignItems: 'center',
     justifyContent: 'center',
     padding: 10,
     borderRadius: 4,
   },
   buttonText: {
-    color: 'green',
+    color: '#FFF',
     fontSize: 16,
   },
 });

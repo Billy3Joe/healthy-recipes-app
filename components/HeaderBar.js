@@ -70,8 +70,9 @@ container: {
     borderBottomWidth: 1,
     padding:12,
     borderBottomColor: '#DDDDDD',
+
     },
-      
+        
   title: {
     fontSize: 18,
     color:'green',

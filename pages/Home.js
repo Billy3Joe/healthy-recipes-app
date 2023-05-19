@@ -1,105 +1,194 @@
-import {Dimensions, ScrollView, StyleSheet, View } from "react-native";
-import BottomBar from "../components/BottomBar";
+import React, { useState } from 'react';
+import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+// import BottomBar from "../components/BottomBar";
 import HeaderBar from '../components/HeaderBar';
-import PictureComponent from "../components/PictureComponent";
-import React from 'react';
 
-function getRandomInt(max) {
-    return Math.floor(Math.random() * max);
-  }
-  
-function Home() {
-    const DisplayPictures = () => {
-        let linksPictures = [
-          "https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg",
-          "https://randomwordgenerator.com/img/picture-generator/52e1d2454e55b10ff3d8992cc12c30771037dbf852577148762c7ad2904e_640.jpg",
-        ];
+const Home = ({ date, title, image, description }) => {
+  const [posts, setPosts] = useState([
+    {
+      id: 1,
+      showCommentInput: false,
+      comment: '',
+      likes: 0,
+      isLiked: false,
+      date: '19/05/2023',
+      title: 'Salade fraiche',
+      description: "Ce recette est de base américaine, contenant de nombreux vitamines, elle participe à l'épanouissement de l'organisme quand elle est constament consommé.",
+      image: require('../assets/images/recettes-saines-et-legeres.jpg'),
+    },
+    {
+      id: 2,
+      showCommentInput: false,
+      comment: '',
+      likes: 0,
+      isLiked: false,
+      date: '19/05/2023',
+      title: 'Trois recettes de poulet',
+      description: "Ce recette est de base américaine, contenant de nombreux vitamines, elle participe à l'épanouissement de l'organisme quand elle est constament consommé.",
+      image: require('../assets/images/trois-recettes-de-poulet.jpg'),
+    },
+  ]);
 
-        let listUser = [
-            "Nathan Dupont",
-            "Fabio De Jesus",
-            "Gérard Verre",
-            "Christophe Morice",
-            "Jean-Jacques Lesg",
-          ];
-      
-          let listLocation = [
-            "Paris",
-            "Colombes",
-            "Courbevoie",
-            "Nanterre",
-            "Kremlin-le-Bicêtre",
-          ];
+  const handleCommentPress = (postId) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post.id === postId) {
+          return { ...post, showCommentInput: !post.showCommentInput };
+        }
+        return post;
+      })
+    );
+  };
 
-     return linksPictures.map((item, key) => {
-      if (key == 0) {
-        return (
-          <PictureComponent
-            customFirstMargin={{ marginTop: 0 }}
-            uriImage={item}
-            uriImageProfile={
-              "https://www.adobe.com/fr/express/create/media_1bcd514348a568faed99e65f5249895e38b06c947.jpeg?width=400&format=jpeg&optimize=medium"
-            }
-            key={key}
-            userName={listUser[getRandomInt(listUser.length - 1)]}
-            location={listLocation[getRandomInt(listLocation.length - 1)]}
-          />
-        );
-      }
-      if (linksPictures.length - 1 == key) {
-        return (
-          <PictureComponent
-            customLastMargin={{ marginBottom: 110 }}
-            uriImage={item}
-            uriImageProfile={
-              "https://www.adobe.com/fr/express/create/media_1bcd514348a568faed99e65f5249895e38b06c947.jpeg?width=400&format=jpeg&optimize=medium"
-            }
-            key={key}
-            userName={listUser[getRandomInt(listUser.length - 1)]}
-            location={listLocation[getRandomInt(listLocation.length - 1)]}
-          />
-        );
-      }
-      return (
-        <PictureComponent
-          uriImage={item}
-          key={key}
-          uriImageProfile={
-            "https://www.adobe.com/fr/express/create/media_1bcd514348a568faed99e65f5249895e38b06c947.jpeg?width=400&format=jpeg&optimize=medium"
-          }
-          userName={listUser[getRandomInt(listUser.length - 1)]}
-          location={listLocation[getRandomInt(listLocation.length - 1)]}
-        />
-      );
-    });
-  };  
+  const handleCommentChange = (postId, text) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post.id === postId) {
+          return { ...post, comment: text };
+        }
+        return post;
+      })
+    );
+  };
+
+  const handleCommentSubmit = (postId) => {
+    // Ajoutez ici la logique pour soumettre le commentaire à votre backend
+    console.log('Comment submitted for post', postId);
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post.id === postId) {
+          return { ...post, comment: '', showCommentInput: false };
+        }
+        return post;
+      })
+    );
+  };
+
+  const handleLikePress = (postId) => {
+    setPosts((prevPosts) =>
+      prevPosts.map((post) => {
+        if (post.id === postId) {
+          const updatedLikes = post.isLiked ? post.likes - 1 : post.likes + 1;
+          return { ...post, likes: updatedLikes, isLiked: !post.isLiked };
+        }
+        return post;
+      })
+    );
+  };
+
   return (
-    <View style={{ flex: 1 }}>
-      <HeaderBar namePage={"Home"} />
-      <ScrollView
-        style={{
-          backgroundColor: "green",
-        }}
-        contentContainerStyle={{ flexGrow: 1, justifyContent: "center" }}
-        showsVerticalScrollIndicator={false}
-      >
-        <View style={styles.scrollViewContainer}>
-          <DisplayPictures /> 
-        </View>
-      </ScrollView>
-      <BottomBar namePage={"Home"} />
-    </View>
-  );
-}
+    <ScrollView style={styles.container}>
+      <HeaderBar namePage="Home" />
+      {posts.map((post) => (
+        <View style={styles.card} key={post.id}>
+          <Image source={post.image} style={styles.image} />
+          <View style={styles.content}>
+            <Text style={styles.date}>Publié le {post.date}</Text>
+            <Text style={styles.title}>{post.title}</Text>
+            <Text style={styles.description}>{post.description}</Text>
+            <View style={styles.iconsContainer}>
+              <TouchableOpacity onPress={() => handleCommentPress(post.id)}>
+                <Ionicons name="chatbubble-outline" size={24} color="gray" style={styles.icon} />
+              </TouchableOpacity>
 
-export default Home;
+              <TouchableOpacity onPress={() => handleLikePress(post.id)}>
+                <Ionicons
+                  name={post.isLiked ? "heart" : "heart-outline"}
+                  size={24}
+                  color={post.isLiked ? "red" : "gray"}
+                  style={styles.icon}
+                />
+              </TouchableOpacity>
+              <Text style={styles.likes}>{post.likes}</Text>
+              <Ionicons name="share-outline" size={24} color="gray" style={styles.icon} />
+            </View>
+            {post.showCommentInput && (
+              <View style={styles.commentContainer}>
+                <TextInput
+                  style={styles.commentInput}
+                  placeholder="Ajouter un commentaire..."
+                  value={post.comment}
+                  onChangeText={(text) => handleCommentChange(post.id, text)}
+                />
+                <TouchableOpacity onPress={() => handleCommentSubmit(post.id)}>
+                  <Ionicons name="send" size={24} color="gray" style={styles.sendIcon} />
+                </TouchableOpacity>
+              </View>
+            )}
+          </View>
+        </View>
+      ))}
+      {/* <BottomBar namePage="Home" /> */}
+    </ScrollView>
+  );
+};
+
+
 
 const styles = StyleSheet.create({
-  scrollView: {
-    height: Dimensions.get("window").height,
-  },
-  mainContainer: {
+  container: {
     flex: 1,
+    backgroundColor: '#fff',
   },
-  scrollViewContainer: {},
+  card: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    margin: 16,
+    elevation: 2,
+  },
+  image: {
+    width: '100%',
+    height: 200,
+    borderTopLeftRadius: 8,
+    borderTopRightRadius: 8,
+    marginBottom: 8,
+  },
+  content: {
+    padding: 16,
+  },
+  date: {
+    fontSize: 14,
+    color: '#888',
+    marginBottom: 4,
+  },
+  title: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 8,
+  },
+  description: {
+    fontSize: 16,
+    color: '#444',
+  },
+  iconsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap:8,
+    marginTop: 8,
+  },
+  icon: {
+    marginRight: 12,
+  },
+  commentContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginTop: 8,
+    borderWidth: 1,
+    borderColor: '#888',
+    borderRadius: 8,
+    paddingHorizontal: 8,
+  },
+  commentInput: {
+    flex: 1,
+    paddingVertical: 8,
+    fontSize: 16,
+    color: '#333',
+  },
+  sendIcon: {
+    marginLeft: 8,
+  },
+
 });
+
+export default Home;
