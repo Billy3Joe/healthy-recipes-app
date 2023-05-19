@@ -5,10 +5,10 @@ function InitialPage() {
   const navigation = useNavigation();
 
   const actionNavigationSignin = () => {
-    navigation.navigate("Login");
+    navigation.navigate("Home");
   };
   const actionNavigationSignup = () => {
-    navigation.navigate("SignUp");
+    navigation.navigate("Signup");
   };
 
   return (

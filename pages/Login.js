@@ -1,4 +1,4 @@
-import { useNavigationUpn } from "@react-navigation/native";
+import { useNavigation } from "@react-navigation/native";
 import { useRef, useState } from "react";
 import {
   Alert,
@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+
 
 
 const Login = () => {
@@ -79,8 +80,10 @@ const [textPassword, setTextPassword] = useState("");
         style={styles.signUpButon}
         // onPress={actionNavigationSignUp}
       >
-        <Text style={{ color: "white", fontWeight: "bold" }}>Sign up</Text>
-      </TouchableOpacity>
+        <Text 
+          style={{ color: "white", fontWeight: "bold" }}>Sign up
+        </Text>
+      </TouchableOpacity >
     </View>
   </View>
 );

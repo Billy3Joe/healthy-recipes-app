@@ -2,6 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Home from "./pages/Home";
 import SignIn from "./pages/Login";
 import SignUp from "./pages/Signup";
 import InitialPage from "./pages/InitialPage";
@@ -12,14 +13,22 @@ export default function App() {
   return (
        <NavigationContainer>
            <Stack.Navigator
-            initialRouteName="InitialPage"
-            screenOptions={{
-              headerShown: false,
-            }}
-           >
-            <Stack.Screen name="InitialPage" component={InitialPage} />
-             <Stack.Screen name="SignUp" component={SignUp} />
-             <Stack.Screen name="Login" component={SignIn} />
+              initialRouteName="InitialPage"
+              screenOptions={{
+                headerShown: false,
+              }}
+            >
+              <Stack.Screen name="InitialPage" component={InitialPage} />
+              <Stack.Screen name="Signup" component={SignUp} />
+              <Stack.Screen name="Login" component={SignIn} />
+              <Stack.Screen
+                options={{
+                  animation: "none",
+                  gestureEnabled: false,
+                }}
+                name="Home"
+                component={Home}
+              />
            </Stack.Navigator>
        </NavigationContainer>
       /*<View style={styles.container}>
