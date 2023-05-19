@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
-import HeaderBar from '../components/HeaderBar';
+import BottomBar from '../components/BottomBar';
 
 const CreatePost = () => {
   const [date, setDate] = useState('');
@@ -24,7 +24,7 @@ const CreatePost = () => {
     <View style={styles.container}>
       <View style={styles.navbar}>
         {/* Contenu de votre barre de navigation */}
-        <HeaderBar namePage={'CreatePost'} />
+        {/* <HeaderBar namePage={'CreatePost'} /> */}
       </View>
       <Text style={styles.title}>Créer une nouvelle recette</Text>
       <View style={styles.formContainer}>
@@ -58,6 +58,7 @@ const CreatePost = () => {
           <Text style={styles.buttonText}>Créer le post</Text>
         </TouchableOpacity>
       </View>
+      <BottomBar namePage="CreatePost" />
     </View>
   );
 };

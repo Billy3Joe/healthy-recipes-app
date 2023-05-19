@@ -1,5 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import { 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View, 
+  Image,
+  ImageBackground ,
+  StatusBar ,
+ } from "react-native";
 
 function InitialPage() {
   const navigation = useNavigation();
@@ -12,60 +20,68 @@ function InitialPage() {
   };
 
   return (
-    <View
-      style={{
-        width: "100%",
-        height: "100%",
-        alignItems: "center",
-        backgroundColor: "green",
-      }}
-    >
+    <ImageBackground 
+      source ={require('../assets/images/imgAccueil.webp')} 
+      style = {styles.imageBackground}>
+      <StatusBar style="auto" />
       <View
         style={{
-          marginTop: 100,
-          marginBottom: 80,
-          width: 300,
-          height: 200,
+          width: "100%",
+          height: "100%",
           alignItems: "center",
+          // backgroundColor: "green",
         }}
       >
-        <Text style={[styles.textTitle, styles.shadowProp]}>
-          <Image
-              source={require('../assets/logo.png')}
-              style={styles.image}
-            />
-        </Text>
-        <Text style={styles.textSubTitle}>Healthy Education</Text>
-        
-      </View>
-      <View style={{ alignItems: "center", marginBottom: 10 }}>
-        <Text style={styles.textAccountInformation}>
-          Welcome to Healthy Education
-        </Text>
-        <Text style={{ fontStyle: "italic" }}>
-          Join us to share with other users your best Healthy Recipes.
-        </Text>
-      </View>
-      <View>
-        <TouchableOpacity
-          onPress={actionNavigationSignup}
-          style={[styles.item, styles.shadowProp, { backgroundColor: "white" }]}
+        <View
+          style={{
+            marginTop: 100,
+            marginBottom: 80,
+            width: 300,
+            height: 200,
+            alignItems: "center",
+          }}
         >
-          <Text>Signup</Text>
-        </TouchableOpacity>
-        
-        <TouchableOpacity 
-           onPress={actionNavigationSignin} 
-           style={[styles.item]}>
-          <Text>Signin</Text>
-        </TouchableOpacity>
+          <Text style={[styles.textTitle, styles.shadowProp]}>
+            <Image
+                source={require('../assets/logo.png')}
+                style={styles.image}
+              />
+          </Text>
+          <Text style={styles.textSubTitle}>Healthy Education</Text>
+          
+        </View>
+        <View style={{ alignItems: "center", marginBottom: 10 }}>
+          <Text style={styles.textAccountInformation}>
+            Welcome to Healthy Education
+          </Text>
+          <Text style={{ fontStyle: "italic" }}>
+            Join us to share with other users your best Healthy Recipes.
+          </Text>
+        </View>
+        <View>
+          <TouchableOpacity
+            onPress={actionNavigationSignup}
+            style={[styles.item, styles.shadowProp, { backgroundColor: "white" }]}
+          >
+            <Text>Signup</Text>
+          </TouchableOpacity>
+          
+          <TouchableOpacity 
+            onPress={actionNavigationSignin} 
+            style={[styles.item]}>
+            <Text>Signin</Text>
+          </TouchableOpacity>
+        </View>
       </View>
-    </View>
+    </ImageBackground>
   );
 }
 export default InitialPage;
 
 const styles = StyleSheet.create({
+  imageBackground: {
+    flex: 1,
+  },
   image: {
     width: 100,
     height: 100,

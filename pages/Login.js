@@ -8,6 +8,8 @@ import {
   TouchableHighlight,
   TouchableOpacity,
   View,
+  ImageBackground ,
+  StatusBar ,
 } from "react-native";
 
 
@@ -23,73 +25,81 @@ const [textPassword, setTextPassword] = useState("");
 
 
   return (
-    <View
-    style={{
-      width: "100%",
-      height: "100%",
-      alignItems: "center",
-      backgroundColor: "green",
-    }}
-  >
-    <View
+    <ImageBackground 
+      source ={require('../assets/images/imgSignin.webp')} 
+      style = {styles.imageBackground}>
+      <StatusBar style="auto" />
+      <View
       style={{
-        marginTop: 120,
-        width: 300,
-        height: 150,
+        width: "100%",
+        height: "100%",
         alignItems: "center",
+        // backgroundColor: "green",
       }}
     >
-      <Text style={[styles.textTitle, styles.shadowProp]}>Welcome back!</Text>
-      <Text style={styles.textSubTitle}>
-        We're so excited to see you again!
-      </Text>
-    </View>
-    <View>
-      <Text style={styles.textAccountInformation}>ACCOUNT INFORMATION</Text>
-      <TextInput
-        // onSubmitEditing={() => ref_input2.current.focus()}
-        returnKeyType={"next"}
-        placeholder="Username"
-        autoFocus={true}
-        onChangeText={(newText) => setTextUsername(newText)}
-        autoCapitalize="none"
-        autoCorrect={false}
-        style={styles.input}
-      />
-      <TextInput
-        clearButtonMode="always"
-        placeholder="Password"
-        onChangeText={(newText) => setTextPassword(newText)}
-        autoCapitalize="none"
-        autoCorrect={false}
-        secureTextEntry={true}
-        style={styles.input}
-        // ref={ref_input2}
-      />
-    </View>
-    <View>
-      <TouchableHighlight
-        activeOpacity={1}
-        underlayColor="white"
-        style={[styles.item, styles.shadowProp]}
-        onPress={() => getUserInfo(textUsername)}
+      <View
+        style={{
+          marginTop: 120,
+          width: 300,
+          height: 150,
+          alignItems: "center",
+        }}
       >
-        <Text>Login</Text>
-      </TouchableHighlight>
-      <TouchableOpacity
-        style={styles.signUpButon}
-        // onPress={actionNavigationSignUp}
-      >
-        <Text 
-          style={{ color: "white", fontWeight: "bold" }}>Sign up
+        <Text style={[styles.textTitle, styles.shadowProp]}>Login Form</Text>
+        <Text style={styles.textSubTitle}>
+          We're so excited to see you again!
         </Text>
-      </TouchableOpacity >
+      </View>
+      <View>
+        <Text style={styles.textAccountInformation}>ACCOUNT INFORMATION</Text>
+        <TextInput
+          // onSubmitEditing={() => ref_input2.current.focus()}
+          returnKeyType={"next"}
+          placeholder="Username"
+          autoFocus={true}
+          onChangeText={(newText) => setTextUsername(newText)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          style={styles.input}
+        />
+        <TextInput
+          clearButtonMode="always"
+          placeholder="Password"
+          onChangeText={(newText) => setTextPassword(newText)}
+          autoCapitalize="none"
+          autoCorrect={false}
+          secureTextEntry={true}
+          style={styles.input}
+          // ref={ref_input2}
+        />
+      </View>
+      <View>
+        <TouchableHighlight
+          activeOpacity={1}
+          underlayColor="white"
+          style={[styles.item, styles.shadowProp]}
+          onPress={() => getUserInfo(textUsername)}
+        >
+          <Text>Login</Text>
+        </TouchableHighlight>
+        <TouchableOpacity
+          style={styles.signUpButon}
+          // onPress={actionNavigationSignUp}
+        >
+          <Text 
+            style={{ color: "white", fontWeight: "bold" }}>Sign up
+          </Text>
+        </TouchableOpacity >
+      </View>
     </View>
-  </View>
+  </ImageBackground>
 );
 };
 
 const styles = StyleSheet.create({
+  imageBackground: {
+    flex: 1,
+  },
     signUpButon: {
       alignSelf: "flex-end",
     },
@@ -144,6 +154,7 @@ const styles = StyleSheet.create({
     textAccountInformation: {
       fontSize: 13,
       fontWeight: "bold",
+      textAlign:'center',
     },
     textInput: {
       fontSize: 12,

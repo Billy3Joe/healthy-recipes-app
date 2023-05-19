@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-// import BottomBar from "../components/BottomBar";
-import HeaderBar from '../components/HeaderBar';
+import BottomBar from "../components/BottomBar";
 
-const Home = ({ date, title, image, description }) => {
+const Home = () => {
   const [posts, setPosts] = useState([
     {
       id: 1,
+      user: {
+        name: 'John Doe',
+        profileImage: require('../assets/img-profiles/avatar.jpg'),
+      },
       showCommentInput: false,
       comment: '',
       likes: 0,
@@ -19,6 +22,10 @@ const Home = ({ date, title, image, description }) => {
     },
     {
       id: 2,
+      user: {
+        name: 'Jane Smith',
+        profileImage: require('../assets/img-profiles/avatar.jpg'),
+      },
       showCommentInput: false,
       comment: '',
       likes: 0,
@@ -76,12 +83,15 @@ const Home = ({ date, title, image, description }) => {
       })
     );
   };
-
+  
   return (
     <ScrollView style={styles.container}>
-      <HeaderBar namePage="Home" />
       {posts.map((post) => (
         <View style={styles.card} key={post.id}>
+          <View style={styles.userContainer}>
+            <Image source={post.user.profileImage} style={styles.profileImage} />
+            <Text style={styles.userName}>{post.user.name}</Text>
+          </View>
           <Image source={post.image} style={styles.image} />
           <View style={styles.content}>
             <Text style={styles.date}>Publié le {post.date}</Text>
@@ -119,11 +129,10 @@ const Home = ({ date, title, image, description }) => {
           </View>
         </View>
       ))}
-      {/* <BottomBar namePage="Home" /> */}
+      <BottomBar namePage="Home" />
     </ScrollView>
   );
 };
-
 
 
 const styles = StyleSheet.create({
@@ -136,6 +145,21 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     margin: 16,
     elevation: 2,
+  },
+  userContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 16,
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 8,
+  },
+  userName: {
+    fontSize: 16,
+    fontWeight: 'bold',
   },
   image: {
     width: '100%',
@@ -164,11 +188,15 @@ const styles = StyleSheet.create({
   iconsContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap:8,
     marginTop: 8,
   },
   icon: {
     marginRight: 12,
+  },
+  likes: {
+    fontSize: 16,
+    color: 'gray',
+    marginRight: 8,
   },
   commentContainer: {
     flexDirection: 'row',
@@ -188,7 +216,6 @@ const styles = StyleSheet.create({
   sendIcon: {
     marginLeft: 8,
   },
-
 });
 
 export default Home;
