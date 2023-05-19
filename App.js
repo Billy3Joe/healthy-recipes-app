@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import Posts from "./pages/CreatePost";
 import SignIn from "./pages/Login";
 import SignUp from "./pages/Signup";
 import InitialPage from "./pages/InitialPage";
@@ -29,6 +31,8 @@ export default function App() {
                 name="Home"
                 component={Home}
               />
+              <Stack.Screen name="CreatePost" component={Posts} />
+              <Stack.Screen name="Profile" component={Profile} />
            </Stack.Navigator>
        </NavigationContainer>
       /*<View style={styles.container}>

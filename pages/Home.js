@@ -1,4 +1,5 @@
 import {Dimensions, ScrollView, StyleSheet, View } from "react-native";
+import BottomBar from "../components/BottomBar";
 import HeaderBar from '../components/HeaderBar';
 import PictureComponent from "../components/PictureComponent";
 import React from 'react';
@@ -10,9 +11,8 @@ function getRandomInt(max) {
 function Home() {
     const DisplayPictures = () => {
         let linksPictures = [
-          "https://images3.alphacoders.com/977/thumbbig-977081.webp",
+          "https://cdn.pixabay.com/photo/2014/11/05/15/57/salmon-518032_1280.jpg",
           "https://randomwordgenerator.com/img/picture-generator/52e1d2454e55b10ff3d8992cc12c30771037dbf852577148762c7ad2904e_640.jpg",
-
         ];
 
         let listUser = [
@@ -87,6 +87,7 @@ function Home() {
           <DisplayPictures /> 
         </View>
       </ScrollView>
+      <BottomBar namePage={"Home"} />
     </View>
   );
 }

@@ -1,5 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Button, Alert } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 
 function HeaderBar(props) {
   const navigation = useNavigation();
@@ -10,33 +11,49 @@ function HeaderBar(props) {
 
   
   const handlePost = () => {
-    navigation.navigate("Posts");
+    navigation.navigate("CreatePost");
   };
 
 
   const handleProfile = () => {
     navigation.navigate("Profile");
   };
-  
+
   const handleLogout = () => {
-    // Ajoutez ici la logique de déconnexion
-    // par exemple, réinitialiser les données de l'utilisateur et rediriger vers l'écran de connexion
+    // Logique de déconnexion ici
+  
+    // Exemple de logique de déconnexion avec réinitialisation des données de l'utilisateur et redirection vers l'écran de connexion
+    resetUserData(); // Fonction pour réinitialiser les données de l'utilisateur
+    navigateToLogin(); // Fonction pour naviguer vers l'écran de connexion
+  
+    // Affichage d'une boîte de dialogue pour informer l'utilisateur de la déconnexion réussie
+    Alert.alert('Déconnexion', 'Vous avez été déconnecté avec succès.');
   };
+  
 
 
   return (
     <View style={styles.container}>
-    <TouchableOpacity onPress={() => navigation.navigate('Home')}>
-      <Text style={styles.title}>Home</Text>
+    <TouchableOpacity 
+      style={{ padding: 10, borderRadius: 5 }} 
+      onPress={() => navigation.navigate('Home')}>
+      <Ionicons name="home" size={24} color="green" />
     </TouchableOpacity>
-    <TouchableOpacity onPress={(handlePost) => navigation.navigate('Posts')}>
-      <Text style={styles.title}>Post</Text>
+
+    <TouchableOpacity 
+      style={{ padding: 10, borderRadius: 5 }} 
+      onPress={(handlePost) => navigation.navigate('CreatePost')}>
+      <Ionicons name="add-circle" size={24} color="green" />
     </TouchableOpacity>
-    <TouchableOpacity onPress={(handleProfile) => navigation.navigate('Profile')}>
-      <Text style={styles.title}>Profile</Text>
+
+    <TouchableOpacity 
+      style={{ padding: 10, borderRadius: 5 }} 
+      onPress={(handleProfile) => navigation.navigate('Profile')}>
+      <Ionicons name="person" size={24} color="green" />
     </TouchableOpacity>
-    <TouchableOpacity onPress={handleLogout}>
-      <Text style={styles.title}>Déconnexion</Text>
+
+    <TouchableOpacity onPress={handleLogout} style={{ padding: 10, borderRadius: 5 }}>
+      <Ionicons name="log-out-outline" size={24} color="red" />
     </TouchableOpacity>
   </View>
   );
