@@ -21,6 +21,10 @@ function BottomBar(props) {
     navigation.navigate("Profile");
   };
 
+  const handlePostsUser = () => {
+    navigation.navigate("Posts-user");
+  };
+
   const handleSettings = () => {
     setModalVisible(true);
   };
@@ -71,7 +75,7 @@ function BottomBar(props) {
               <Ionicons name="person" size={24} color="green" />
               <Text style={styles.modalItemText}>Informations profile</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.modalItem} onPress={() => navigation.navigate('Home')}>
+            <TouchableOpacity style={styles.modalItem} onPress={() => navigation.navigate('PostsUser')}>
               <Ionicons name="newspaper-outline" size={24} color="green" />
               <Text style={styles.modalItemText}>Mes publications</Text>
             </TouchableOpacity>

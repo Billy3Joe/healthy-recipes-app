@@ -80,14 +80,14 @@ const [textPassword, setTextPassword] = useState("");
           style={[styles.item, styles.shadowProp]}
           onPress={() => getUserInfo(textUsername)}
         >
-          <Text>Login</Text>
+          <Text  style={{fontWeight:"bold"}}>Login</Text>
         </TouchableHighlight>
         <TouchableOpacity
           style={styles.signUpButon}
           // onPress={actionNavigationSignUp}
         >
           <Text 
-            style={{ color: "white", fontWeight: "bold" }}>Sign up
+            style={{ color: "white", fontWeight: "bold" }}>Go to Sign up
           </Text>
         </TouchableOpacity >
       </View>
@@ -101,7 +101,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
     signUpButon: {
-      alignSelf: "flex-end",
+      // alignSelf: "flex-end",
+      textAlign: "center",
     },
     shadowProp: {
       shadowColor: "#171717",

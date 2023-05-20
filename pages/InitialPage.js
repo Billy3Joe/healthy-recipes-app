@@ -59,17 +59,16 @@ function InitialPage() {
           </Text>
         </View>
         <View>
+          <TouchableOpacity 
+            onPress={actionNavigationSignin} 
+            style={[styles.item]}>
+            <Text  style={{fontWeight:"bold"}}>Signin</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={actionNavigationSignup}
             style={[styles.item, styles.shadowProp, { backgroundColor: "white" }]}
           >
-            <Text>Signup</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity 
-            onPress={actionNavigationSignin} 
-            style={[styles.item]}>
-            <Text>Signin</Text>
+            <Text style={{fontWeight:"bold"}}>Signup</Text>
           </TouchableOpacity>
         </View>
       </View>

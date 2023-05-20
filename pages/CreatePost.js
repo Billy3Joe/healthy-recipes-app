@@ -3,7 +3,6 @@ import { View, TextInput, TouchableOpacity, Text, Image, StyleSheet } from 'reac
 import BottomBar from '../components/BottomBar';
 
 const CreatePost = () => {
-  const [date, setDate] = useState('');
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -14,7 +13,6 @@ const CreatePost = () => {
     // par exemple, envoyez les données au serveur ou ajoutez-les à une liste de posts
 
     // Réinitialisez les valeurs après l'ajout du post
-    setDate('');
     setImage('');
     setTitle('');
     setDescription('');
@@ -30,12 +28,6 @@ const CreatePost = () => {
       <View style={styles.formContainer}>
         <TextInput
           style={styles.input}
-          placeholder="Date"
-          value={date}
-          onChangeText={text => setDate(text)}
-        />
-        <TextInput
-          style={styles.input}
           placeholder="URL de l'image"
           value={image}
           onChangeText={text => setImage(text)}
@@ -48,11 +40,11 @@ const CreatePost = () => {
           onChangeText={text => setTitle(text)}
         />
         <TextInput
-          style={styles.input}
+          style={[styles.input, styles.descriptionInput]}
           placeholder="Description"
           multiline
           value={description}
-          onChangeText={text => setDescription(text)}
+          onChangeText={(text) => setDescription(text)}
         />
         <TouchableOpacity style={styles.addButton} onPress={handleAddPost}>
           <Text style={styles.buttonText}>Créer le post</Text>
@@ -67,6 +59,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     flexDirection: 'column',
+    paddingTop:180,
   },
   navbar: {
     backgroundColor: '#f5f5f5',
@@ -90,6 +83,9 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     padding: 10,
     marginBottom: 10,
+  },
+  descriptionInput: {
+    height: 150, 
   },
   image: {
     width: '100%',

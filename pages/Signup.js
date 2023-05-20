@@ -80,13 +80,13 @@ const Signup = () => {
             underlayColor="white"
             style={[styles.item, styles.shadowProp]}
           >
-          <Text>Register</Text>
+          <Text  style={{fontWeight:"bold"}}>Register</Text>
           </TouchableHighlight>
           <TouchableOpacity
             style={styles.signUpButon}
             // onPress={actionNavigationLogin}
           >
-            <Text style={{ color: "white", fontWeight: "bold" }}>
+            <Text style={{ color: "white", fontWeight: "bold", textAlign: "center" }}>
               Go to login page
             </Text>
           </TouchableOpacity>
@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
   },
 
   signUpButon: {
-    alignSelf: "flex-end",
+    // alignSelf: "flex-end",
+    textAlign: "center",
   },
   shadowProp: {
     shadowColor: "#171717",
