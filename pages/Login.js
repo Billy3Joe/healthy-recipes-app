@@ -11,17 +11,34 @@ import {
   ImageBackground ,
   StatusBar ,
 } from "react-native";
-
+import firebase from 'firebase/compat/app';
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import 'firebase/compat/auth';
 
 
 const Login = () => {
-    
-const [textUsername, setTextUsername] = useState("");
-const [textPassword, setTextPassword] = useState("");
+const navigation = useNavigation();    
+const [email, setEmail] = useState("");
+const [Password, setPassword] = useState("");
+const auth = getAuth();
 
-  const getUserInfo = () => {
-    // Ajoutez ici la logique d'inscription avec Firebase
-  };
+const handleSignIn = () => {
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, Password)
+    .then((userCredential) => {
+    // Handle successful sign-in
+    console.log("Successful sign-in");
+    // Navigate to the home page
+    navigation.navigate('Home');
+      
+    })
+    .catch((error) => {
+      console.log("Error during sign-in:", error);
+      // Display an alert or handle the error
+      Alert.alert("Error", "Invalid email or password");
+    });
+};
 
 
   return (
@@ -55,9 +72,9 @@ const [textPassword, setTextPassword] = useState("");
         <TextInput
           // onSubmitEditing={() => ref_input2.current.focus()}
           returnKeyType={"next"}
-          placeholder="Username"
+          placeholder="Email"
           autoFocus={true}
-          onChangeText={(newText) => setTextUsername(newText)}
+          onChangeText={(newText) => setEmail(newText)}
           autoCapitalize="none"
           autoCorrect={false}
           style={styles.input}
@@ -65,7 +82,7 @@ const [textPassword, setTextPassword] = useState("");
         <TextInput
           clearButtonMode="always"
           placeholder="Password"
-          onChangeText={(newText) => setTextPassword(newText)}
+          onChangeText={(newText) => setPassword(newText)}
           autoCapitalize="none"
           autoCorrect={false}
           secureTextEntry={true}
@@ -78,13 +95,13 @@ const [textPassword, setTextPassword] = useState("");
           activeOpacity={1}
           underlayColor="white"
           style={[styles.item, styles.shadowProp]}
-          onPress={() => getUserInfo(textUsername)}
+          onPress={() => handleSignIn()}
         >
           <Text  style={{fontWeight:"bold"}}>Login</Text>
         </TouchableHighlight>
         <TouchableOpacity
           style={styles.signUpButon}
-          // onPress={actionNavigationSignUp}
+          onPress={()=>{handleSignIn()}}
         >
           <Text 
             style={{ color: "white", fontWeight: "bold" }}>Go to Sign up

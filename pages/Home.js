@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BottomBar from "../components/BottomBar";
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const Home = () => {
   const [posts, setPosts] = useState([
@@ -85,6 +86,7 @@ const Home = () => {
   };
   
   return (
+    <SafeAreaView style={styles.container}>
     <ScrollView style={styles.container}>
       {posts.map((post) => (
         <View style={styles.card} key={post.id}>
@@ -129,9 +131,12 @@ const Home = () => {
           </View>
         </View>
       ))}
-      <BottomBar namePage="Home" />
+      
     </ScrollView>
+    <BottomBar namePage="Home"/>
+    </SafeAreaView>
   );
+  
 };
 
 

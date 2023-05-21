@@ -11,15 +11,48 @@ import {
   ImageBackground ,
   StatusBar ,
 } from "react-native";
+// Import the functions you need from the SDKs you need
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyDov17ALUBYKsRRPqR6xxYGLq2Xs66_rtw",
+  authDomain: "recipes-app-c60eb.firebaseapp.com",
+  projectId: "recipes-app-c60eb",
+  storageBucket: "recipes-app-c60eb.appspot.com",
+  messagingSenderId: "708037718915",
+  appId: "1:708037718915:web:acb4159698d39547693cb6",
+  measurementId: "G-Z1V69ZH6S3"
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
 
 
 const Signup = () => {
-  const [username, setUsernanme] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSignup = () => {
-    // Ajoutez ici la logique d'inscription avec Firebase
+    console.log(password, email)
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+    .then((userCredential) => {
+      const user = userCredential.user;
+        console.log('Signup successful:', user);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+        const errorMessage = error.message;
+        console.error('Signup error:', errorCode, errorMessage);
+      console.log(error);
+    });
+    
   };
 
   return (
@@ -49,21 +82,21 @@ const Signup = () => {
         <View>
           <Text style={styles.textAccountInformation}>ACCOUNT INFORMATION</Text>
           <TextInput
-            onChangeText={(newText) => setTextUsername(newText)}
+            onChangeText={(newText) => setUsername(newText)}
             placeholder="Username"
             autoCapitalize="none"
             autoCorrect={false}
             style={styles.input}
           />
           <TextInput
-            onChangeText={(newText) => setTextEmail(newText)}
+            onChangeText={(newText) => setEmail(newText)}
             placeholder="Email"
             autoCapitalize="none"
             autoCorrect={false}
             style={styles.input}
           />
           <TextInput
-            onChangeText={(newText) => setTextPassword(newText)}
+            onChangeText={(newText) => setPassword(newText)}
             placeholder="Password"
             secureTextEntry={true}
             autoCapitalize="none"
@@ -74,7 +107,7 @@ const Signup = () => {
         <View>
           <TouchableHighlight
             onPress={() => {
-              createUserInDB();
+              handleSignup();
             }}
             activeOpacity={1}
             underlayColor="white"

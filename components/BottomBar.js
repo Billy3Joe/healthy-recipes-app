@@ -46,7 +46,7 @@ function BottomBar(props) {
   );
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} >
       <TouchableOpacity 
         style={{ padding: 10, borderRadius: 5 }} 
         onPress={() => navigation.navigate('Home')}>
@@ -103,9 +103,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     gap: 43,
     backgroundColor: '#FFF', 
-    paddingTop: 50,
-    borderBottomWidth: 1,
-    padding: 12,
     borderBottomColor: '#DDDDDD',
   },
   modalContainer: {

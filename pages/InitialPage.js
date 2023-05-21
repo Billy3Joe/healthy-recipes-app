@@ -13,7 +13,7 @@ function InitialPage() {
   const navigation = useNavigation();
 
   const actionNavigationSignin = () => {
-    navigation.navigate("Home");
+    navigation.navigate("Login");
   };
   const actionNavigationSignup = () => {
     navigation.navigate("Signup");
