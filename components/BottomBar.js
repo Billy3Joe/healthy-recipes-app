@@ -1,5 +1,13 @@
 import { useNavigation, useFocusEffect } from "@react-navigation/native";
-import { StyleSheet, Text, TouchableOpacity, View, Button, Alert, Modal } from "react-native";
+import { 
+  StyleSheet, 
+  Text, 
+  TouchableOpacity, 
+  View, 
+  Button,
+  Alert, 
+  Modal 
+} from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { useState } from 'react';
 import React from 'react';
@@ -79,11 +87,11 @@ function BottomBar(props) {
               <Ionicons name="newspaper-outline" size={24} color="green" />
               <Text style={styles.modalItemText}>Mes publications</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.modalItem} onPress={() => navigation.navigate('Friends')}>
+            <TouchableOpacity style={styles.modalItem} onPress={() => navigation.navigate('FriendsList')}>
               <Ionicons name="people-outline" size={24} color="green" />
               <Text style={styles.modalItemText}>Ma liste d'amis</Text>
             </TouchableOpacity>
-            <TouchableOpacity style={styles.modalItem} onPress={() => navigation.navigate('Discover')}>
+            <TouchableOpacity style={styles.modalItem} onPress={() => navigation.navigate('NewFriendsDiscover')}>
               <Ionicons name="person-add-outline" size={24} color="green" />
               <Text style={styles.modalItemText}>Découvrir des personnes</Text>
             </TouchableOpacity>

@@ -1,22 +1,101 @@
 import React, { useState } from 'react';
 import { View, TextInput, TouchableOpacity, Text, Image, StyleSheet } from 'react-native';
 import BottomBar from '../components/BottomBar';
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/firestore';
+import 'firebase/compat/storage';
+import * as ImagePicker from 'expo-image-picker';
 
 const CreatePost = () => {
+  
   const [image, setImage] = useState('');
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
 
-  const handleAddPost = () => {
-    // Logique pour ajouter le post
-    // Utilisez les valeurs de date, image, title et description pour créer le post
-    // par exemple, envoyez les données au serveur ou ajoutez-les à une liste de posts
-
-    // Réinitialisez les valeurs après l'ajout du post
-    setImage('');
-    setTitle('');
-    setDescription('');
+  const handleAddPost = async () => {
+    try {
+      // Get the current user's UID
+      const uid = firebase.auth().currentUser.uid;
+  
+      // Create a reference to the Firebase Storage
+      const storageRef = firebase.storage().ref();
+      
+      // Check if an image is selected
+      if (image !== '') {
+        // Create a unique filename for the image
+        const filename = `${uid}_${Date.now()}.jpg`;
+        
+  
+        // Get the image path from the image picker result
+        const imageUri = image;
+        
+        // Upload the image to Firebase Storage
+        const response = await fetch(imageUri);
+        console.log(response)
+        const blob = await response.blob();
+        const imageRef = storageRef.child(`images/${filename}`);
+        await imageRef.put(blob);
+        
+        // Get the URL of the uploaded image
+        const imageURL = await imageRef.getDownloadURL();
+  
+        // Create a new post object
+        const post = {
+          user: uid,
+          title: title,
+          content: description,
+          imageURL: imageURL,
+          date: new Date(),
+          isLiked: false,
+          comments: [],
+          likes: 0,
+        };
+  
+        // Add the post to Firestore
+        await firebase.firestore().collection('posts').add(post);
+  
+        console.log('Post added successfully');
+  
+        // Reset the input values
+        setImage('');
+        setTitle('');
+        setDescription('');
+      } else {
+        console.log('Please select an image');
+      }
+    } catch (error) {
+      console.error('Error adding post:', error);
+    }
   };
+  
+  // Image picker function
+  const pickImage = async () => {
+    try {
+      // Demande l'autorisation d'accéder à la bibliothèque multimédia de l'appareil
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        console.log("Autorisation d'accéder à la galerie refusée");
+        return;
+      }
+  
+      // Lance la galerie d'images pour sélectionner une image
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Images,
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 1,
+      });
+  
+      // Vérifie si la sélection d'image a été annulée ou non
+      if (!result.cancelled) {
+        // Met à jour l'état avec l'URI de l'image sélectionnée
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) {
+      console.error('Erreur lors de la sélection de l\'image :', error);
+    }
+};
+
 
   return (
     <View style={styles.container}>
@@ -26,13 +105,9 @@ const CreatePost = () => {
       </View>
       <Text style={styles.title}>Créer une nouvelle recette</Text>
       <View style={styles.formContainer}>
-        <TextInput
-          style={styles.input}
-          placeholder="URL de l'image"
-          value={image}
-          onChangeText={text => setImage(text)}
-        />
-        {image !== '' && <Image source={{ uri: image }} style={styles.image} />}
+      <TouchableOpacity style={styles.addButton} onPress={pickImage}>
+        <Text style={styles.buttonText}>Select Image</Text>
+      </TouchableOpacity>
         <TextInput
           style={styles.input}
           placeholder="Titre"
@@ -46,7 +121,7 @@ const CreatePost = () => {
           value={description}
           onChangeText={(text) => setDescription(text)}
         />
-        <TouchableOpacity style={styles.addButton} onPress={handleAddPost}>
+        <TouchableOpacity style={styles.addButton} onPress={()=>handleAddPost()}>
           <Text style={styles.buttonText}>Créer le post</Text>
         </TouchableOpacity>
       </View>
