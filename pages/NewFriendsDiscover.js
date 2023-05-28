@@ -20,7 +20,7 @@ const friendsData = [
   },
   {
     id: '2',
-    name: 'Jane Smith',
+    name: 'Jane Smith ',
     photo: require('../assets/img-profiles/avatar.jpg'),
   },
   {
@@ -95,11 +95,15 @@ const NewFriendsDiscover = () => {
   const navigation = useNavigation();
   const renderFriendItem = ({ item }) => (
     <View style={styles.friendContainer}>
+      <View>
       <Image source={item.photo} style={styles.friendPhoto} />
-      <Text style={styles.friendName}>{item.name}</Text>
-      <TouchableOpacity style={styles.followButton}>
+        <Text></Text>
+        <TouchableOpacity style={styles.followButton}>
         <Text style={styles.followButtonText}>Suivre</Text>
       </TouchableOpacity>
+      </View>
+      <Text style={styles.friendName}>{item.name}</Text>
+      
     </View>
   );
 

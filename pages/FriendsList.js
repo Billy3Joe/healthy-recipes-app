@@ -1,5 +1,13 @@
 import React from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, FlatList } from 'react-native';
+import { 
+  View,
+  Text, 
+  Image, 
+  StyleSheet, 
+  TouchableOpacity, 
+  FlatList 
+} from 'react-native';
+import { useNavigation} from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 import BottomBar from "../components/BottomBar";
 
@@ -84,6 +92,7 @@ const friendsData = [
 ];
 
 const FriendsList = () => {
+  const navigation = useNavigation();
   const renderFriendItem = ({ item }) => (
     <View style={styles.friendContainer}>
       <Image source={item.photo} style={styles.friendPhoto} />
@@ -95,7 +104,7 @@ const FriendsList = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <TouchableOpacity style={styles.backButton}>
-          <Ionicons name="arrow-back" size={24} color="black" />
+          <Ionicons onPress={() => navigation.navigate('Home')}  name="arrow-back" size={24} color="black" />
         </TouchableOpacity>
         <Text style={styles.title}>Liste des amis</Text>
       </View>

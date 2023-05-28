@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView, RefreshControl } from 'react-native';
+import { 
+  View, 
+  Text, 
+  Image, 
+  StyleSheet, 
+  TouchableOpacity, 
+  TextInput, 
+  ScrollView, 
+  RefreshControl } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BottomBar from "../components/BottomBar";
 import { SafeAreaView } from 'react-native-safe-area-context';

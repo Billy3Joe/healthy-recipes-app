@@ -1,9 +1,20 @@
 import React, { useState } from 'react';
-import { View, Text, Image, StyleSheet, TouchableOpacity, TextInput, ScrollView, SafeAreaView } from 'react-native';
+import { 
+  View, 
+  Text, 
+  Image, 
+  StyleSheet, 
+  TouchableOpacity, 
+  TextInput, 
+  ScrollView, 
+  SafeAreaView 
+} from 'react-native';
+import { useNavigation} from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 import BottomBar from "../components/BottomBar";
 
 const PostsUser = () => {
+  const navigation = useNavigation();
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -72,6 +83,12 @@ const PostsUser = () => {
   
   return (
     <SafeAreaView style={styles.container}>
+       <View style={styles.header}>
+        <TouchableOpacity  style={styles.backButton}>
+          <Ionicons onPress={() => navigation.navigate('Home')} name="arrow-back" size={24} color="black" />
+        </TouchableOpacity>
+          <Text style={{ fontSize:25, color:'green'}}>Édition de l'utilisateur</Text>
+      </View>
       <ScrollView>
         {posts.map((post) => (
           <View style={styles.card} key={post.id}>
@@ -127,6 +144,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 16,
+    marginTop: 16,
   },
   card: {
     backgroundColor: '#fff',
