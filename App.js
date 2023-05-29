@@ -5,6 +5,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "./pages/Home";
 import PostsUser from "./pages/PostsUser";
 import Profile from "./pages/Profile";
+import EditeName from "./pages/EditeName";
+import EditeEmail from "./pages/EditeEmail";
+import EditePhoto from "./pages/EditePhoto";
 import FriendsList from "./pages/FriendsList";
 import NewFriendsDiscover from './pages/NewFriendsDiscover';
 import Posts from "./pages/CreatePost";
@@ -36,6 +39,9 @@ export default function App() {
               />
               <Stack.Screen name="CreatePost" component={Posts} />
               <Stack.Screen name="Profile" component={Profile} />
+              <Stack.Screen name="EditeName" component={EditeName} />
+              <Stack.Screen name="EditeEmail" component={EditeEmail} />
+              <Stack.Screen name="EditePhoto" component={EditePhoto} />
               <Stack.Screen name="FriendsList" component={FriendsList} />
               <Stack.Screen name="NewFriendsDiscover" component={NewFriendsDiscover} />
               <Stack.Screen name="PostsUser" component={PostsUser} />

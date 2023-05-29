@@ -8,6 +8,7 @@ import {
  } from 'react-native';
 import { useNavigation} from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import BottomBar from "../components/BottomBar";
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
@@ -39,20 +40,6 @@ export default function Profile() {
       });
   }, []);
 
-  const handleEditProfileImage = () => {
-    // Logic to handle editing profile image
-    console.log("Edit profile image");
-  };
-
-  const handleEditName = () => {
-    // Logic to handle editing name
-    console.log("Edit name");
-  };
-
-  const handleEditEmail = () => {
-    // Logic to handle editing email
-    console.log("Edit email");
-  };
 
   if (!user) {
     // Display a loading state or placeholder while fetching the user data
@@ -75,26 +62,29 @@ return (
       <View style={styles.editIconContainer}>
         <Ionicons name="pencil" size={20} color="white" />
       </View>
-   
-    <TouchableOpacity onPress={handleEditProfileImage} style={[styles.editButton]}>
-      <Ionicons name="pencil" size={20} color="white" />
-    </TouchableOpacity>
     
-    <View style={styles.userInfoContainer}>
-      <Text style={styles.name}>{user.Name}</Text>
-      <TouchableOpacity onPress={handleEditName} style={[styles.editButton]}>
-        <Ionicons name="pencil" size={20} color="white" />
-      </TouchableOpacity>
-    </View>
-    
-    
+      <View style={styles.userInfoContainer}>
+        <Text style={styles.name}>{user.Name}</Text>
+      </View>
 
     <View style={styles.emailContainer}>
       <Text style={styles.details}>EMAIL: {user.Email}</Text>
-      <TouchableOpacity onPress={handleEditEmail} style={[styles.editButton]}>
-          <Ionicons name="pencil" size={20} color="white" />
+    </View>
+    <View style={styles.infosContainer}>
+      <TouchableOpacity onPress={() => navigation.navigate('EditePhoto')} style={[styles.editButton]}>
+            <Text style={{fontWeight:'bold', color:'#FFF',}}>Image</Text>
+            <MaterialIcons name="chevron-right" size={20} color="white" />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('EditeName')} style={[styles.editButton]}>
+            <Text style={{fontWeight:'bold', color:'#FFF',}}>Nom</Text>
+            <MaterialIcons name="chevron-right" size={20} color="white" />
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate('EditeEmail')} style={[styles.editButton]}>
+            <Text style={{fontWeight:'bold', color:'#FFF',}}>Email</Text>
+            <MaterialIcons name="chevron-right" size={20} color="white" />
       </TouchableOpacity>
     </View>
+   
     <View style={styles.footer}>
       <BottomBar namePage="Home" />
     </View>
@@ -117,10 +107,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     marginBottom: 16,
   },
-  profileImageContainer: {
-    position: 'relative',
-    marginBottom: 20,
-  },
+ 
   profileImage: {
     width: 100,
     height: 100,
@@ -149,12 +136,13 @@ title:{
     marginBottom: 5,
   },
   editButton: {
+    flexDirection:'row',
     marginTop: 10,
     backgroundColor: 'green',
-    borderRadius: 15,
-    padding: 10,
+    padding: 5,
     alignItems: 'center',
     justifyContent: 'center',
+    gap:190,
   },
   footer: {
     position: 'absolute',
